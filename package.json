@@ -1,0 +1,57 @@
+{
+  "name": "sftgraph",
+  "version": "0.0.0",
+  "description": "a graph class",
+  "repository": "telega/sftgraph",
+  "license": "MIT",
+  "author": "telega <tom@telega.org>",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "source": "src/index.tsx",
+  "browser": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tslib build",
+    "coverage": "tslib coverage",
+    "coveralls": "tslib coveralls",
+    "format": "tslib format",
+    "lint": "tslib lint",
+    "prepare": "tslib build",
+    "pub": "tslib pub",
+    "setup": "tslib setup",
+    "start": "tslib start",
+    "test": "tslib test",
+    "watch": "tslib watch"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,json,md}": [
+      "tslib format",
+      "git add"
+    ],
+    "package.json": [
+      "sort-package-json",
+      "git add"
+    ]
+  },
+  "prettier": "tslib-cli",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^25.1.3",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.7",
+    "sort-package-json": "^1.40.0",
+    "tslib-cli": "^6.0.9"
+  },
+  "peerDependencies": {},
+  "klap": {
+    "example": "public/index.tsx"
+  }
+}
