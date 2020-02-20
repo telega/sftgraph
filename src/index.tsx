@@ -1,3 +1,1 @@
-const sum = (a, b) => a + b
-
-export { sum }
+export * from './classes/Graph'

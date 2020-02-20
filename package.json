@@ -42,7 +42,9 @@
     ]
   },
   "prettier": "tslib-cli",
-  "dependencies": {},
+  "dependencies": {
+    "bson": "^4.0.3"
+  },
   "devDependencies": {
     "@types/jest": "^25.1.3",
     "husky": "^4.2.3",

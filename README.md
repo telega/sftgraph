@@ -1,6 +1,6 @@
 # sftgraph
 
-> a graph class
+> a graph implementation class
 
 [![The GZIP size of sftgraph](https://img.badgesize.io/https://unpkg.com/sftgraph?compression=gzip&label=GZIP%20Size)](https://unpkg.com/sftgraph) [![Build Status](https://travis-ci.org/osdevisnot/sftgraph.svg?branch=master)](https://travis-ci.org/osdevisnot/sftgraph) [![Coverage Status](https://coveralls.io/repos/github/osdevisnot/sftgraph/badge.svg?branch=master)](https://coveralls.io/github/osdevisnot/sftgraph?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 

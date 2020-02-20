@@ -1,8 +1,8 @@
-import { sum } from '../src'
+import { Graph } from '../src'
 
 describe('sftgraph', () => {
   test('exports', () => {
-    expect(sum).toBeDefined()
-    expect(typeof sum).toEqual('function')
+    expect(Graph).toBeDefined()
+    expect(typeof Graph).toEqual('function')
   })
 })
