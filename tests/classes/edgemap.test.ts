@@ -13,7 +13,7 @@ describe('EdgeMap', () => {
     expect(typeof entries).toEqual('object')
   }),
     it('initialises an edgemap with edge data', () => {
-      const edge = new Edge(new Node(1), 2, 3)
+      const edge = new Edge(new Node(1), { weight: 2 }, 3)
 
       const edgeMap = new EdgeMap(edge)
 

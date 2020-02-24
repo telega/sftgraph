@@ -1,16 +1,15 @@
 import { ObjectId } from 'bson'
 import { WithId } from '../interfaces/WithId'
+import { WithWeight } from '../interfaces/WithWeight'
 import { Node } from './Node'
 
-export class Edge<N, D> implements WithId {
+export class Edge<N, D extends WithWeight> implements WithId {
   public readonly _id: ObjectId
-  public readonly weight: number
   public edgeData: D
   public targetNode: Node<N>
 
   constructor(node: Node<N>, data?: D, weight = 1) {
     this._id = new ObjectId()
-    this.weight = weight
     this.edgeData = data
     this.targetNode = node
   }
@@ -33,5 +32,13 @@ export class Edge<N, D> implements WithId {
 
   get nodeId() {
     return this.targetNode._id
+  }
+
+  get weight() {
+    return this.edgeData.weight
+  }
+
+  set weight(weight: number) {
+    this.edgeData.weight = weight
   }
 }

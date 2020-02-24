@@ -1,7 +1,8 @@
 import { ObjectId } from 'bson'
 import { Edge } from './Edge'
+import { WithWeight } from '../interfaces/WithWeight'
 
-export class EdgeMap<N, D> {
+export class EdgeMap<N, D extends WithWeight> {
   private map: Map<ObjectId, Edge<N, D>> = new Map()
 
   constructor(edge?: Edge<N, D>) {
