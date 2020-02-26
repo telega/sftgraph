@@ -1,5 +1,7 @@
 import { Graph } from '../src'
 import { Node } from '../src'
+import { EdgeMap } from '../src'
+import { AdjacencyMap } from '../src'
 
 describe('sftgraph', () => {
   test('exports', () => {
@@ -8,5 +10,11 @@ describe('sftgraph', () => {
 
     expect(Node).toBeDefined()
     expect(typeof Node).toEqual('function')
+
+    expect(EdgeMap).toBeDefined()
+    expect(typeof EdgeMap).toEqual('function')
+
+    expect(AdjacencyMap).toBeDefined()
+    expect(typeof AdjacencyMap).toEqual('function')
   })
 })

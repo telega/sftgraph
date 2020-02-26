@@ -1,7 +1,6 @@
 import { EdgeMap } from '../../src/classes/EdgeMap'
 import { Edge } from '../../src/classes/Edge'
 import { Node } from '../../src/classes/Node'
-import { WithWeight } from '../../src/interfaces/WithWeight'
 
 describe('EdgeMap', () => {
   it('initialises an edgemap', () => {
