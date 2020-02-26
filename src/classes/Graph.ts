@@ -1,16 +1,7 @@
 import { ObjectId } from 'bson'
 import { Edge } from './Edge'
 import { Node } from './Node'
-
-// export interface AdjacencyList<U> {
-//   [Key: string]: Set<Edge<U>>;
-// }
-
-interface WithId {
-  readonly _id: ObjectId
-}
-
-// export type AdjacencySet<U> = Edge<>
+import { EdgeMap } from './EdgeMap'
 
 export class Graph<U, T> {
   public nodes: Map<ObjectId, Node<T>> = new Map<ObjectId, Node<T>>()

@@ -1,6 +1,7 @@
 import { EdgeMap } from '../../src/classes/EdgeMap'
 import { Edge } from '../../src/classes/Edge'
 import { Node } from '../../src/classes/Node'
+import { WithWeight } from '../../src/interfaces/WithWeight'
 
 describe('EdgeMap', () => {
   it('initialises an edgemap', () => {
@@ -13,7 +14,7 @@ describe('EdgeMap', () => {
     expect(typeof entries).toEqual('object')
   }),
     it('initialises an edgemap with edge data', () => {
-      const edge = new Edge(new Node(1), { weight: 2 }, 3)
+      const edge = new Edge(new Node<number>(1), { weight: 2 }, 3)
 
       const edgeMap = new EdgeMap(edge)
 
