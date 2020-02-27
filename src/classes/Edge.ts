@@ -8,7 +8,7 @@ export class Edge<N, D extends WithWeight> implements WithId {
   public edgeData: D
   public targetNode: Node<N>
 
-  constructor(node: Node<N>, data?: D, weight = 1) {
+  constructor(node: Node<N>, data: D) {
     this._id = new ObjectId()
     this.edgeData = data
     this.targetNode = node
