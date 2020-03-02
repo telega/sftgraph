@@ -14,7 +14,7 @@ export class NodeMap<ND> {
   public add = (id: ObjectId, node: Node<ND>) => this.map.set(id, node)
   public addNode = (node: Node<ND>) => !this.hasNode(node) && this.add(node._id, node)
 
-  public getNode = (id: ObjectId) => this.map.get(id)
+  public getNodeById = (id: ObjectId) => this.map.get(id)
 
   public values = () => this.map.values()
   public entries = () => this.map.entries()

@@ -10,25 +10,36 @@ export class Graph<GD, ND, ED extends WithWeight> implements WithId {
   readonly _id: ObjectId
   public nodeMap: NodeMap<ND>
   public adjacencyMap: AdjacencyMap<ND, ED>
+  public metaData: GD
 
-  constructor() {
+  constructor(metaData?: GD) {
     this._id = new ObjectId()
     this.nodeMap = new NodeMap<ND>()
     this.adjacencyMap = new AdjacencyMap<ND, ED>()
+    this.metaData = metaData
   }
 
-  public addNode = (nodeData: ND) => {
-    const node = new Node(nodeData)
+  public addNode = (node: Node<ND>) => {
     this.nodeMap.addNode(node)
     this.adjacencyMap.addNode(node)
     return node
   }
+
+  public addNewNode = (nodeData: ND) => this.addNode(new Node(nodeData))
 
   public addEdge = (source: Node<ND>, target: Node<ND>, edgeData: ED) =>
     this.adjacencyMap.addEdge(source, target, edgeData)
 
   get nodes() {
     return this.nodeMap.entries()
+  }
+
+  get nodeValues() {
+    return this.nodeMap.values()
+  }
+
+  getNodeById(id: ObjectId) {
+    return this.nodeMap.getNodeById(id)
   }
 
   // public nodes: Map<ObjectId, Node<T>> = new Map<ObjectId, Node<T>>()
