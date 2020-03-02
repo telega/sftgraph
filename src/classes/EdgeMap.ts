@@ -2,6 +2,7 @@ import { ObjectId } from 'bson'
 import { Edge } from './Edge'
 import { Node } from './Node'
 import { WithWeight } from '../interfaces/WithWeight'
+import * as _ from 'lodash'
 
 export class EdgeMap<ND, ED extends WithWeight> {
   private map: Map<ObjectId, Edge<ND, ED>> = new Map()
@@ -28,4 +29,7 @@ export class EdgeMap<ND, ED extends WithWeight> {
   public values = () => this.map.values()
   public set = (key: ObjectId, value: Edge<ND, ED>) => this.map.set(key, value)
   public setEdge = (edge: Edge<ND, ED>) => this.set(edge._id, edge)
+
+  public getEdgesByTargetNodeId = (id: ObjectId) =>
+    new Set<Edge<ND, ED>>(_.filter(Object.fromEntries(this.map), (edge: Edge<ND, ED>) => edge._id.equals(id)))
 }

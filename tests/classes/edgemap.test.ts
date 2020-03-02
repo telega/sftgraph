@@ -31,4 +31,22 @@ describe('EdgeMap', () => {
         expect(value).toEqual(edge)
       }
     })
+
+  describe('methods', () => {
+    it('getEdgesByTargetNodeId', () => {
+      const node = new Node<number>(1)
+      const targetNode = new Node<number>(2)
+
+      const edge = new Edge(targetNode, { weight: 1 })
+      const otherEdge = new Edge(node, { weight: 1 })
+
+      const edgeMap = new EdgeMap()
+      edgeMap.setEdge(edge)
+      edgeMap.setEdge(otherEdge)
+
+      const result = edgeMap.getEdgesByTargetNodeId(targetNode._id)
+
+      console.log(result)
+    })
+  })
 })
