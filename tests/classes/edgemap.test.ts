@@ -45,8 +45,8 @@ describe('EdgeMap', () => {
       edgeMap.setEdge(otherEdge)
 
       const result = edgeMap.getEdgesByTargetNodeId(targetNode._id)
-
-      console.log(result)
+      expect(typeof result).toEqual('object')
+      expect(result.has(edge)).toBeTruthy()
     })
   })
 })

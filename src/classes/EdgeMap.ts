@@ -31,5 +31,10 @@ export class EdgeMap<ND, ED extends WithWeight> {
   public setEdge = (edge: Edge<ND, ED>) => this.set(edge._id, edge)
 
   public getEdgesByTargetNodeId = (id: ObjectId) =>
-    new Set<Edge<ND, ED>>(_.filter(Object.fromEntries(this.map), (edge: Edge<ND, ED>) => edge._id.equals(id)))
+    new Set<Edge<ND, ED>>(_.filter(Object.fromEntries(this.map), (edge: Edge<ND, ED>) => edge.nodeId.equals(id)))
+
+  public removeEdgesByTargetNodeId = (id: ObjectId) => this.removeEdges(this.getEdgesByTargetNodeId(id))
+
+  public removeEdgeById = (id: ObjectId) => this.map.delete(id)
+  public removeEdges = (edges: Set<Edge<ND, ED>>) => edges.forEach(({ _id }: Edge<ND, ED>) => this.removeEdgeById(_id))
 }
