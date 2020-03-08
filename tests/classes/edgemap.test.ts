@@ -1,6 +1,7 @@
 import { EdgeMap } from '../../src/classes/EdgeMap'
 import { Edge } from '../../src/classes/Edge'
 import { Node } from '../../src/classes/Node'
+import { WithWeight } from '../../src/interfaces/WithWeight'
 
 describe('EdgeMap', () => {
   it('initialises an edgemap', () => {
@@ -47,6 +48,29 @@ describe('EdgeMap', () => {
       const result = edgeMap.getEdgesByTargetNodeId(targetNode._id)
       expect(typeof result).toEqual('object')
       expect(result.has(edge)).toBeTruthy()
+    })
+    it('removeEdgesByTargetNodeId', () => {
+      const node = new Node<number>(1)
+      const targetNode = new Node<number>(2)
+      const otherNode = new Node<number>(8)
+
+      const edge = new Edge<number, WithWeight>(targetNode, { weight: 1 })
+      const otherEdge = new Edge(node, { weight: 1 })
+      const thirdEdge = new Edge(otherNode, { weight: 1 })
+      const fourthEdge = new Edge(targetNode, { weight: 3 })
+
+      const edgeMap = new EdgeMap<number, WithWeight>()
+      edgeMap.setEdge(edge)
+      edgeMap.setEdge(otherEdge)
+      edgeMap.setEdge(thirdEdge)
+      edgeMap.setEdge(fourthEdge)
+
+      edgeMap.removeEdgesByTargetNodeId(targetNode._id)
+
+      expect(edgeMap.hasEdge(edge)).toBe(false)
+      expect(edgeMap.hasEdge(fourthEdge)).toBe(false)
+      expect(edgeMap.hasEdge(otherEdge)).toBe(true)
+      expect(edgeMap.hasEdge(thirdEdge)).toBe(true)
     })
   })
 })

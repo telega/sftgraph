@@ -17,7 +17,7 @@ export class AdjacencyMap<ND, ED extends WithWeight> {
   public addNode = (node: Node<ND>) => !this.hasNode(node) && this.map.set(node._id, new EdgeMap<ND, ED>())
 
   public hasEdge = (source: Node<ND>, target: Node<ND>) =>
-    this.has(source._id) && this.map.get(source._id).has(target._id)
+    this.hasNode(source) && this.map.get(source._id).hasEdgeToTargetNode(target)
 
   public addEdge = (source: Node<ND>, target: Node<ND>, edgeData: ED) => this.addBiEdge(source, target, edgeData)
   public addBiEdge = (source: Node<ND>, target: Node<ND>, edgeData: ED) =>
@@ -33,4 +33,9 @@ export class AdjacencyMap<ND, ED extends WithWeight> {
   public values = () => this.map.values()
   public entries = () => this.map.entries()
   public clear = () => this.map.clear()
+
+  public removeNode = ({ _id }: Node<ND>) => this.removeNodeById(_id)
+
+  public removeNodeById = (id: ObjectId) =>
+    this.has(id) && this.map.delete(id) && this.map.forEach(edgeMap => edgeMap.removeEdgesByTargetNodeId(id))
 }
