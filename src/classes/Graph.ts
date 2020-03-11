@@ -25,10 +25,27 @@ export class Graph<GD, ND, ED extends WithWeight> implements WithId {
     return node
   }
 
+  public addNodes = (nodes: Array<Node<ND>>) => nodes.forEach(node => this.addNode(node))
+
   public addNewNode = (nodeData: ND) => this.addNode(new Node(nodeData))
 
   public addEdge = (source: Node<ND>, target: Node<ND>, edgeData: ED) =>
-    this.adjacencyMap.addEdge(source, target, edgeData)
+    this.createMissingNodes(source, target) && this.adjacencyMap.addEdge(source, target, edgeData)
+
+  public addBiEdge = (source: Node<ND>, target: Node<ND>, edgeData: ED) => this.addEdge(source, target, edgeData)
+
+  public addDiEdge = (source: Node<ND>, target: Node<ND>, edgeData: ED) =>
+    this.createMissingNodes(source, target) && this.adjacencyMap.addDiEdge(source, target, edgeData)
+
+  private createMissingNodes = (source: Node<ND>, target: Node<ND>) =>
+    this.hasSourceAndTargetNodes(source, target) || this.addMissingNodes(source, target)
+
+  private addMissingNodes = (source: Node<ND>, target: Node<ND>) => {
+    !this.hasNode(source) && this.addNode(source)
+    !this.hasNode(target) && this.addNode(target)
+  }
+  private hasSourceAndTargetNodes = (source: Node<ND>, target: Node<ND>) => this.hasNode(source) && this.hasNode(target)
+  public hasNode = (node: Node<ND>) => this.nodeMap.hasNode(node)
 
   get nodes() {
     return this.nodeMap.entries()
@@ -38,20 +55,15 @@ export class Graph<GD, ND, ED extends WithWeight> implements WithId {
     return this.nodeMap.values()
   }
 
+  get size() {
+    return this.nodeMap.size
+  }
+
+  get edgeCount() {
+    return this.adjacencyMap.size
+  }
+
   getNodeById(id: ObjectId) {
     return this.nodeMap.getNodeById(id)
   }
-
-  // public nodes: Map<ObjectId, Node<T>> = new Map<ObjectId, Node<T>>()
-  // adjacencyList: AdjacencyList<U> = {};
-  // public adjacencyList: Map<ObjectId, Set<AdjacencySet<U>>> = new Map<ObjectId, Set<AdjacencySet<U>>>()
-
-  // public addEdge = (source: ObjectId, target: ObjectId, weight: number = 1, data: U) => {
-  //   // this.validEdgeIds(source, target) &&
-  //   //   this.adjacencyList[source.toHexString()].push(new Edge({ node: target, weight, data }))
-  // }
-
-  // public validEdgeIds = (source: ObjectId, target: ObjectId) => this.validNodeId(source) && this.validNodeId(target)
-  // public validNodeId = (id: ObjectId) => this.nodes.has(id)
-  //  public getAdjacencyList = () => this.adjacencyList
 }

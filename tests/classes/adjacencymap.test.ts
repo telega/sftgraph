@@ -27,7 +27,26 @@ describe('AdjacencyMap', () => {
       expect(adjacencyMap.hasNode(nodeB)).toBeTruthy()
 
       expect(adjacencyMap.hasEdge(nodeA, nodeB)).toBeTruthy()
-      // expect(adjacencyMap.hasEdge(nodeB, nodeA)).toBeTruthy()
+      expect(adjacencyMap.hasEdge(nodeB, nodeA)).toBeTruthy()
+    })
+    it('removeNode', () => {
+      const adjacencyMap = new AdjacencyMap()
+
+      const nodeA = new Node<string>('a')
+      const nodeB = new Node<string>('b')
+
+      adjacencyMap.addNode(nodeA)
+      adjacencyMap.addNode(nodeB)
+
+      adjacencyMap.addEdge(nodeA, nodeB, { weight: 1 })
+
+      adjacencyMap.removeNode(nodeA)
+
+      expect(adjacencyMap.hasNode(nodeA)).toBeFalsy()
+      expect(adjacencyMap.hasNode(nodeB)).toBeTruthy()
+
+      expect(adjacencyMap.hasEdge(nodeA, nodeB)).toBeFalsy()
+      expect(adjacencyMap.hasEdge(nodeB, nodeA)).toBeFalsy()
     })
   })
 })

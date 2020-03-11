@@ -19,4 +19,8 @@ export class NodeMap<ND> {
   public values = () => this.map.values()
   public entries = () => this.map.entries()
   public clear = () => this.map.clear()
+
+  public get size() {
+    return this.map.size
+  }
 }

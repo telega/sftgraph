@@ -1,5 +1,6 @@
 import { Graph } from '../../src/classes/Graph'
 import { Node } from '../../src/classes/Node'
+import { WithWeight } from '../../src/interfaces/WithWeight'
 
 describe('Graph', () => {
   it('initialises a new graph ', () => {
@@ -21,5 +22,21 @@ describe('Graph', () => {
         expect.objectContaining({ nodeData: { foo: 'baz' } }),
       ])
     )
+  })
+  it('addEdge', () => {
+    const graph = new Graph<{}, number, WithWeight>()
+    const graphTwo = new Graph<{}, number, WithWeight>()
+
+    const nodeA = new Node<number>(1)
+    const nodeB = new Node<number>(2)
+    graph.addNodes([nodeA, nodeB])
+    graph.addEdge(nodeA, nodeB, { weight: 1 })
+
+    expect(graph.size).toBe(2)
+    expect(graph.edgeCount).toBe(2)
+
+    graphTwo.addEdge(nodeA, nodeB, { weight: 1 })
+    expect(graphTwo.size).toBe(2)
+    expect(graphTwo.edgeCount).toBe(2)
   })
 })
