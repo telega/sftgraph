@@ -2,7 +2,7 @@ import { ObjectId } from 'bson'
 import { Edge } from './Edge'
 import { Node } from './Node'
 import { WithWeight } from '../interfaces/WithWeight'
-import { compose } from 'lodash/fp'
+import * as __ from 'lodash/fp'
 import * as _ from 'lodash'
 export class EdgeMap<ND, ED extends WithWeight> {
   private map: Map<ObjectId, Edge<ND, ED>> = new Map()
@@ -33,7 +33,7 @@ export class EdgeMap<ND, ED extends WithWeight> {
   public getEdgesByTargetNodeId = (id: ObjectId) =>
     new Set<Edge<ND, ED>>(_.filter(Object.fromEntries(this.map), (edge: Edge<ND, ED>) => edge.nodeId.equals(id)))
 
-  public removeEdgesByTargetNodeId = (id: ObjectId) => compose(this.removeEdges, this.getEdgesByTargetNodeId)(id)
+  public removeEdgesByTargetNodeId = (id: ObjectId) => __.compose(this.removeEdges, this.getEdgesByTargetNodeId)(id)
 
   public removeEdges = (edges: Set<Edge<ND, ED>>) => edges.forEach(({ _id }: Edge<ND, ED>) => this.removeEdgeById(_id))
   public removeEdgeById = (id: ObjectId) => this.map.delete(id)
