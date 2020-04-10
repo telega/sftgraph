@@ -3,7 +3,7 @@ import { Edge } from './Edge'
 import { Node } from './Node'
 import { EdgeMap } from './EdgeMap'
 import { WithId } from '../interfaces/WithId'
-import { WithWeight } from 'src/interfaces/WithWeight'
+import { WithWeight } from '../interfaces/WithWeight'
 import { NodeMap } from './NodeMap'
 import { AdjacencyMap } from './AdjacencyMap'
 export class Graph<GD, ND, ED extends WithWeight> implements WithId {

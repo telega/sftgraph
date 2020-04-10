@@ -2,7 +2,7 @@ import { ObjectId } from 'bson';
 import { Edge } from './Edge';
 import { Node } from './Node';
 import { WithId } from '../interfaces/WithId';
-import { WithWeight } from 'src/interfaces/WithWeight';
+import { WithWeight } from '../interfaces/WithWeight';
 import { NodeMap } from './NodeMap';
 import { AdjacencyMap } from './AdjacencyMap';
 export declare class Graph<GD, ND, ED extends WithWeight> implements WithId {
