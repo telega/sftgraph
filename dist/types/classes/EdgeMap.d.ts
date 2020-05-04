@@ -23,4 +23,5 @@ export declare class EdgeMap<ND, ED extends WithWeight> {
     removeEdgeById: (id: ObjectId) => boolean;
     hasEdgeToTargetNodeId: (id: ObjectId) => boolean;
     hasEdgeToTargetNode: ({ _id }: Node<ND>) => boolean;
+    getTargetNodes: () => Node<ND>[];
 }

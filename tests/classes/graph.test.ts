@@ -39,4 +39,24 @@ describe('Graph', () => {
     expect(graphTwo.size).toBe(2)
     expect(graphTwo.edgeCount).toBe(2)
   })
+
+  it('getNeighborsByNode', () => {
+    const graph = new Graph<{}, number, WithWeight>()
+
+    const nodeA = new Node<number>(1)
+    const nodeB = new Node<number>(2)
+
+    graph.addNodes([nodeA, nodeB])
+    graph.addEdge(nodeA, nodeB, { weight: 1 })
+
+    const nodeANeighbors = graph.getNeighborsByNode(nodeA)
+    const nodeBNeighbors = graph.getNeighborsById(nodeB._id)
+
+    expect(nodeANeighbors).toHaveLength(1)
+    expect(nodeBNeighbors).toHaveLength(1)
+
+    expect(nodeANeighbors).toEqual(expect.arrayContaining([expect.objectContaining({ data: 2 })]))
+
+    expect(nodeBNeighbors).toEqual(expect.arrayContaining([expect.objectContaining({ data: 1 })]))
+  })
 })

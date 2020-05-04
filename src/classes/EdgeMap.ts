@@ -39,4 +39,6 @@ export class EdgeMap<ND, ED extends WithWeight> {
 
   public hasEdgeToTargetNodeId = (id: ObjectId) => this.getEdgesByTargetNodeId(id).size > 0
   public hasEdgeToTargetNode = ({ _id }: Node<ND>) => this.hasEdgeToTargetNodeId(_id)
+
+  public getTargetNodes = () => Array.from(this.values()).map(edge => edge.targetNode)
 }

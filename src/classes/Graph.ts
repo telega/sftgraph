@@ -66,4 +66,15 @@ export class Graph<GD, ND, ED extends WithWeight> implements WithId {
   getNodeById(id: ObjectId) {
     return this.nodeMap.getNodeById(id)
   }
+
+  getEdgeMapById(id: ObjectId) {
+    return this.adjacencyMap.has(id) && this.adjacencyMap.getEdgeMap(id)
+  }
+
+  getEdgeMapByNode(node: Node<ND>) {
+    return this.adjacencyMap.hasNode(node) && this.adjacencyMap.getEdgeMapByNode(node)
+  }
+
+  getNeighborsById = (id: ObjectId) => this.getEdgeMapById(id).getTargetNodes()
+  getNeighborsByNode = (node: Node<ND>) => this.getNeighborsById(node._id)
 }

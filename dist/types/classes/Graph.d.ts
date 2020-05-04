@@ -1,6 +1,7 @@
 import { ObjectId } from 'bson';
 import { Edge } from './Edge';
 import { Node } from './Node';
+import { EdgeMap } from './EdgeMap';
 import { WithId } from '../interfaces/WithId';
 import { WithWeight } from '../interfaces/WithWeight';
 import { NodeMap } from './NodeMap';
@@ -26,4 +27,8 @@ export declare class Graph<GD, ND, ED extends WithWeight> implements WithId {
     get size(): number;
     get edgeCount(): number;
     getNodeById(id: ObjectId): Node<ND>;
+    getEdgeMapById(id: ObjectId): EdgeMap<ND, ED>;
+    getEdgeMapByNode(node: Node<ND>): EdgeMap<ND, ED>;
+    getNeighborsById: (id: ObjectId) => Node<ND>[];
+    getNeighborsByNode: (node: Node<ND>) => Node<ND>[];
 }

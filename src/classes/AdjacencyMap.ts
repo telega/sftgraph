@@ -19,6 +19,7 @@ export class AdjacencyMap<ND, ED extends WithWeight> {
   public hasEdge = (source: Node<ND>, target: Node<ND>) =>
     this.hasNode(source) && this.map.get(source._id).hasEdgeToTargetNode(target)
 
+  /** shorthand for add BiEdge */
   public addEdge = (source: Node<ND>, target: Node<ND>, edgeData: ED) => this.addBiEdge(source, target, edgeData)
   public addBiEdge = (source: Node<ND>, target: Node<ND>, edgeData: ED) =>
     this.addDiEdge(source, target, edgeData) && this.addDiEdge(target, source, edgeData)

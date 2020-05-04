@@ -72,5 +72,31 @@ describe('EdgeMap', () => {
       expect(edgeMap.hasEdge(otherEdge)).toBe(true)
       expect(edgeMap.hasEdge(thirdEdge)).toBe(true)
     })
+
+    it('getTargetNodes', () => {
+      const node = new Node<number>(1)
+      const targetNode = new Node<number>(2)
+      const otherTargetNode = new Node<number>(8)
+
+      const edge = new Edge<number, WithWeight>(targetNode, { weight: 1 })
+      const otherEdge = new Edge(otherTargetNode, { weight: 1 })
+
+      const edgeMap = new EdgeMap<number, WithWeight>()
+      edgeMap.setEdge(edge)
+      edgeMap.setEdge(otherEdge)
+
+      const targetNodes = edgeMap.getTargetNodes()
+
+      expect(targetNodes).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            data: 2,
+          }),
+          expect.objectContaining({ data: 8 }),
+        ])
+      )
+
+      expect(targetNodes).toHaveLength(2)
+    })
   })
 })
