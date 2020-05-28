@@ -1,11 +1,12 @@
 import { ObjectId } from 'bson'
 import { Edge } from './Edge'
 import { Node } from './Node'
-import { EdgeMap } from './EdgeMap'
+import { Queue } from './Queue'
 import { WithId } from '../interfaces/WithId'
 import { WithWeight } from '../interfaces/WithWeight'
 import { NodeMap } from './NodeMap'
 import { AdjacencyMap } from './AdjacencyMap'
+import * as _ from 'lodash'
 export class Graph<GD, ND, ED extends WithWeight> implements WithId {
   readonly _id: ObjectId
   public nodeMap: NodeMap<ND>
@@ -67,6 +68,8 @@ export class Graph<GD, ND, ED extends WithWeight> implements WithId {
     return this.nodeMap.getNodeById(id)
   }
 
+  getRandomNode = () => _.sample(Array.from(this.nodeMap.values()))
+
   getEdgeMapById(id: ObjectId) {
     return this.adjacencyMap.has(id) && this.adjacencyMap.getEdgeMap(id)
   }
@@ -77,4 +80,18 @@ export class Graph<GD, ND, ED extends WithWeight> implements WithId {
 
   getNeighborsById = (id: ObjectId) => this.getEdgeMapById(id).getTargetNodes()
   getNeighborsByNode = (node: Node<ND>) => this.getNeighborsById(node._id)
+
+  nodesMatch = (a: Node<ND>, b: Node<ND>) => a._id.equals(b._id)
+
+  bfs(start: Node<ND> = this.getRandomNode(), target: Node<ND> = null) {
+    const queue = new Queue<Node<ND>>([start])
+    const visited = new Map<Node<ND>, number>()
+    const count = 0
+
+    if (this.nodesMatch(start, target)) {
+      return target
+    } else {
+      !visited.has(target) && visited.set(target, count)
+    }
+  }
 }
