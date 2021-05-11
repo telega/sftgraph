@@ -44,7 +44,7 @@
   "prettier": "tslib-cli",
   "dependencies": {
     "bson": "^4.0.3",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/bson": "^4.0.1",
